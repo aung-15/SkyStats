@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyStats — How COVID-19 Reshaped American Air Travel</title>
+  <meta name="description" content="A DH 101 data journalism project tracking how the COVID-19 pandemic reshaped commercial air travel across the ten largest U.S. metro areas, 2019–2025." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="home">
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="15" stroke="#c9a24b" stroke-width="1.5"/>
+          <path d="M6 18L14 14L16 6L18 14L26 18L18 17L16 26L14 17L6 18Z" fill="#c9a24b"/>
+        </svg>
+        SkyStats
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">About</a></li>
+        <li><a href="data-critique.html" data-page="data">Data Critique</a></li>
+        <li><a href="narrative.html" data-page="narrative">Narrative</a></li>
+        <li><a href="sources.html" data-page="sources">Sources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <svg class="hero-routes" viewBox="0 0 1180 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#d9b869" stroke-width="1" fill="none" opacity="0.5">
+        <path d="M40,380 C 300,120 500,420 760,140" />
+        <path d="M100,60 C 350,260 620,40 900,220" />
+        <path d="M-20,220 C 250,340 550,60 780,300 C 900,420 1050,260 1220,180" />
+      </g>
+      <g fill="#e8cf9a">
+        <circle cx="40" cy="380" r="3"/>
+        <circle cx="760" cy="140" r="3"/>
+        <circle cx="100" cy="60" r="3"/>
+        <circle cx="900" cy="220" r="3"/>
+        <circle cx="780" cy="300" r="3"/>
+        <circle cx="1220" cy="180" r="3"/>
+      </g>
+    </svg>
+    <div class="container hero-inner">
+      <span class="eyebrow">DH 101 &middot; Group 2 &middot; SkyStats</span>
+      <h1>How COVID-19 Reshaped American Air Travel</h1>
+      <p class="lede">
+        In 2020, U.S. commercial air travel collapsed almost overnight. Five years
+        later, national passenger totals look fully recovered &mdash; but the
+        recovery was not even. We used federal flight data to trace what actually
+        happened across the ten largest U.S. metropolitan areas.
+      </p>
+      <div class="hero-actions">
+        <a href="narrative.html" class="btn btn-primary">Read the Findings</a>
+        <a href="data-critique.html" class="btn btn-outline">Explore the Dataset</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stat-band">
+    <div class="container">
+      <span class="eyebrow">Why It Matters</span>
+      <h2 style="color:#fff; max-width:600px;">A Pandemic That Grounded a Nation</h2>
+      <div class="stat-band-grid">
+        <div class="stat-card">
+          <div class="stat-number">61.8%</div>
+          <div class="stat-label">DROP IN NATIONAL PASSENGER VOLUME, 2020 VS. 2019</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10</div>
+          <div class="stat-label">LARGEST U.S. METRO AREAS EXAMINED IN THIS STUDY</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4 / 10</div>
+          <div class="stat-label">METRO AREAS STILL BELOW 2019 PASSENGER LEVELS IN 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">+33 mi</div>
+          <div class="stat-label">GROWTH IN AVERAGE FLIGHT SEGMENT LENGTH, 2019&ndash;2023</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">Research Question</span>
+        <h2>What We're Investigating</h2>
+      </div>
+      <div>
+        <p style="font-family: var(--font-display); font-size: 1.3rem; color: var(--navy-900); font-weight: 600;">
+          How did COVID-19 travel restrictions affect commercial air passenger
+          volume and flight distances across the ten largest U.S. metropolitan
+          areas &mdash; and to what extent had these patterns recovered by 2025?
+        </p>
+        <p>
+          Using the Bureau of Transportation Statistics' T-100 Segment dataset,
+          we tracked monthly passenger counts, departures, and flight distances
+          from 2019 through 2025 for Atlanta, Chicago, Dallas&ndash;Fort Worth,
+          Houston, Los Angeles, Miami, New York, Philadelphia, Phoenix, and
+          Washington DC.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Air Travel</span>
+          <span class="tag">COVID-19</span>
+          <span class="tag">Passenger Recovery</span>
+          <span class="tag">Route Networks</span>
+          <span class="tag">BTS T-100 Data</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The Story Behind the Data</span>
+        <h2>Three Threads We Followed</h2>
+        <p>Beyond the headline collapse, the data revealed uneven, sometimes
+          surprising patterns in how air travel came back.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>An Uneven Recovery</h3>
+          <p>
+            National passenger totals surpassed 2019 levels by 2024 &mdash; but
+            that average hides a split: six metro areas grew past their
+            pre-pandemic baseline while four, including Los Angeles and
+            Philadelphia, still hadn't caught up by 2025.
+          </p>
+          <a href="narrative.html#recovery" class="card-link">See the recovery chart &rarr;</a>
+        </div>
+        <div class="card">
+          <h3>Longer Hauls, Fewer Flights</h3>
+          <p>
+            Total departures were still 9.1% below 2019 levels in 2023, even as
+            passenger counts nearly closed the gap &mdash; and the average
+            nonstop segment got noticeably longer, hinting at a shift toward
+            fewer, longer routes.
+          </p>
+          <a href="narrative.html#distance" class="card-link">See the distance trend &rarr;</a>
+        </div>
+        <div class="card">
+          <h3>A Dataset Built for Business</h3>
+          <p>
+            The T-100 dataset is comprehensive on operations &mdash; seats,
+            routes, carriers &mdash; but says nothing about the passengers
+            themselves: who they were, why they flew, or what they paid.
+          </p>
+          <a href="data-critique.html" class="card-link">Read the critique &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center" style="margin-left:auto; margin-right:auto;">
+        <span class="eyebrow">Explore the Site</span>
+        <h2>Dig Into the Project</h2>
+      </div>
+      <div class="explore-grid">
+        <a href="about.html" class="explore-card">
+          <div>
+            <h3>About</h3>
+            <p>Meet Group 2 and learn how the project came together.</p>
+          </div>
+          <span class="card-link">Explore &rarr;</span>
+        </a>
+        <a href="data-critique.html" class="explore-card">
+          <div>
+            <h3>Data Critique</h3>
+            <p>Where the T-100 dataset comes from, and its blind spots.</p>
+          </div>
+          <span class="card-link">Explore &rarr;</span>
+        </a>
+        <a href="narrative.html" class="explore-card">
+          <div>
+            <h3>Narrative</h3>
+            <p>Interactive charts and the full story of the data.</p>
+          </div>
+          <span class="card-link">Explore &rarr;</span>
+        </a>
+        <a href="sources.html" class="explore-card">
+          <div>
+            <h3>Sources</h3>
+            <p>Every dataset and article that informed this project.</p>
+          </div>
+          <span class="card-link">Explore &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">SkyStats</div>
+          <p style="margin:0; font-size:0.88rem;">DH 101 Final Project &middot; Summer 2026</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="data-critique.html">Data Critique</a></li>
+          <li><a href="narrative.html">Narrative</a></li>
+          <li><a href="sources.html">Sources</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 SkyStats &mdash; Group 2, DH 101</span>
+        <span>Data: U.S. Bureau of Transportation Statistics, T-100 Segment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
