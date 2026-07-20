@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Critique — SkyStats</title>
+  <meta name="description" content="A critical look at the BTS T-100 Segment dataset: its provenance, variables, strengths, and blind spots." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="data">
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="15" stroke="#c9a24b" stroke-width="1.5"/>
+          <path d="M6 18L14 14L16 6L18 14L26 18L18 17L16 26L14 17L6 18Z" fill="#c9a24b"/>
+        </svg>
+        SkyStats
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">About</a></li>
+        <li><a href="data-critique.html" data-page="data">Data Critique</a></li>
+        <li><a href="narrative.html" data-page="narrative">Narrative</a></li>
+        <li><a href="sources.html" data-page="sources">Sources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero page-hero">
+    <svg class="hero-routes" viewBox="0 0 1180 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#d9b869" stroke-width="1" fill="none" opacity="0.4">
+        <path d="M-20,220 C 250,340 550,60 780,300 C 900,420 1050,260 1220,180" />
+      </g>
+    </svg>
+    <div class="container hero-inner">
+      <span class="eyebrow">Data Critique</span>
+      <h1>Reading the T-100 Dataset Critically</h1>
+      <p class="lede">
+        Every dataset is built for a purpose, and that purpose shapes what it
+        counts and what it leaves out. Before drawing conclusions from the
+        T-100 Segment data, we examined where it comes from and what it can't
+        tell us.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">Provenance</span>
+        <h2>Where the Data Comes From</h2>
+      </div>
+      <div>
+        <p>
+          The T-100 Segment dataset is part of the Form 41 Traffic Data Bank,
+          managed by the U.S. Bureau of Transportation Statistics (BTS) and
+          funded through the Federal Aviation Administration's (FAA) annual
+          budget. It covers the operational characteristics of the commercial
+          airline industry, split into domestic and international subsections
+          organized by nonstop flight segments.
+        </p>
+        <p>
+          The underlying records originate with the airlines themselves, who
+          are legally required to report them to BTS &mdash; domestic U.S.
+          carriers under 14 CFR Part 241, and foreign carriers with U.S.
+          origin or destination flights under 14 CFR Part 217. That legal
+          mandate is what makes the dataset comprehensive and trustworthy:
+          it isn't voluntary self-reporting, it's regulatory compliance.
+        </p>
+        <div class="callout">
+          <h4>A note on flight segments</h4>
+          <p>
+            A single itinerary can become multiple rows. A flight from
+            Buffalo, NY to Los Angeles, CA with a stop in Chicago, IL is
+            recorded as two separate nonstop segments &mdash; each one
+            counted as its own "flight."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's Inside</span>
+        <h2>Variables We Used</h2>
+        <p>The full T-100 dataset is extensive; our project draws on the following fields.</p>
+      </div>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Fields</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Geography</td>
+            <td>Origin &amp; destination airport code, city, market name, state / FIPS code, world area code</td>
+          </tr>
+          <tr>
+            <td>Aircraft &amp; Carrier</td>
+            <td>Unique carrier code &amp; name, aircraft type group / code / configuration, total seats</td>
+          </tr>
+          <tr>
+            <td>Operations</td>
+            <td>Departures performed, available seats, non-stop segment passengers transported, distance between airports (miles)</td>
+          </tr>
+          <tr>
+            <td>Time</td>
+            <td>Year, month</td>
+          </tr>
+          <tr>
+            <td>Classification</td>
+            <td>Service class (we use "F" &mdash; passenger), source of data (D = Domestic, I = International)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        From these fields, operational metrics like Revenue Passenger Miles
+        (RPMs), Available Seat Miles (ASMs), and load factor can be derived
+        &mdash; giving a detailed picture of how full flights are, how busy
+        airports are, and how airline networks change over time. Because
+        the data runs continuously from 1990 through 2026 with no gaps, it's
+        well suited to measuring exactly the kind of before/after trend we
+        needed to study the impact of COVID-19.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">The Blind Spots</span>
+        <h2>What the Data Doesn't Show</h2>
+      </div>
+      <div>
+        <p>
+          The T-100 dataset excels at documenting the operational side of air
+          traffic, but it has no humanistic dimension. It doesn't tell us who
+          the passengers were &mdash; their age, gender, or socioeconomic
+          status &mdash; why they were traveling, or what they paid for their
+          tickets. We can measure that travel collapsed in 2020, but the
+          dataset alone can't tell us what that meant for the people behind
+          the numbers.
+        </p>
+        <p>
+          It also can't explain <em>why</em> things happened. We can calculate
+          flight delays as the gap between scheduled and actual departure
+          times, but weather conditions and individual aircraft identifiers
+          (tail numbers) aren't included, so the causes of those delays stay
+          invisible. General aviation and military flights are excluded
+          entirely &mdash; only commercial air traffic is recorded, even
+          though both can meaningfully affect commercial operations.
+        </p>
+        <div class="callout">
+          <h4>Why the gaps exist</h4>
+          <p>
+            T-100 is, at its core, a regulatory and business dataset. It
+            reflects what the government needs to oversee commercial
+            aviation &mdash; not what would be most useful to a historian or
+            sociologist. Notably absent: aircraft tail numbers (which would
+            reveal airline business operations) and ticket prices (which
+            would reveal profitability) &mdash; both withheld to protect
+            airlines' business confidentiality. That exclusion represents a
+            deliberate balance between regulatory oversight and commercial
+            privacy, not an oversight.
+          </p>
+        </div>
+        <p>
+          Because of these gaps, we treat T-100 as a strong backbone for
+          measuring <em>what</em> happened to air travel volumes and
+          networks, while relying on the secondary sources listed on our
+          <a href="sources.html">Sources</a> page for the human and
+          behavioral context T-100 can't provide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">SkyStats</div>
+          <p style="margin:0; font-size:0.88rem;">DH 101 Final Project &middot; Summer 2026</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="data-critique.html">Data Critique</a></li>
+          <li><a href="narrative.html">Narrative</a></li>
+          <li><a href="sources.html">Sources</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 SkyStats &mdash; Group 2, DH 101</span>
+        <span>Data: U.S. Bureau of Transportation Statistics, T-100 Segment</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
