@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Narrative — SkyStats</title>
-  <meta name="description" content="Interactive charts and findings tracing how COVID-19 reshaped commercial air travel across the ten largest U.S. metro areas." />
+  <meta name="description" content="A 2,000+ word narrative, timeline, five data visualizations, and a map tracing how COVID-19 reshaped commercial air travel in the ten largest U.S. metro areas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body data-page="narrative">
 
@@ -44,137 +45,395 @@
       <span class="eyebrow">Narrative</span>
       <h1>Tracing the Collapse and the Comeback</h1>
       <p class="lede">
-        We aggregated monthly passenger counts, departures, and flight
-        distances for ten metro areas from 2019 through 2025. Here's what
-        that data shows about how COVID-19 reshaped American air travel
-        &mdash; and how unevenly it recovered.
+        A humanities reading of the T-100 dataset: what the collapse and
+        recovery of air travel reveal about who was flying, why, and which
+        places got left behind.
       </p>
     </div>
   </section>
 
-  <section class="section" id="collapse">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">01 &middot; The Collapse</span>
-        <h2>A Near-Total Shutdown in Spring 2020</h2>
-        <p>
-          Passenger volume across the ten metro areas held close to normal
-          through early 2020, then fell off a cliff. By April 2020, monthly
-          passenger totals were down roughly 96% from the same month a year
-          earlier &mdash; a collapse with no precedent in the modern history
-          of commercial aviation.
-        </p>
-      </div>
-      <div class="chart-panel">
-        <h3>Monthly Passenger Volume: 2019 vs. 2020 vs. 2025</h3>
-        <div class="chart-wrap"><canvas id="chart-monthly"></canvas></div>
-        <p class="chart-caption">
-          Sum of monthly passengers across all 10 metro areas. Note how
-          closely the 2025 line retraces the 2019 seasonal pattern &mdash;
-          the shape of the year came back, even where the underlying volume
-          didn't.
-        </p>
-      </div>
+  <section class="section">
+    <div class="container" style="max-width: 780px;">
+
+      <h2>Introduction</h2>
+      <p>
+        The impact of the pandemic on commercial air travel matters to
+        everyone in the aviation industry trying to adjust their business
+        models to a new normal of traffic patterns. Many studies have
+        examined this from a business perspective &mdash; how airlines
+        responded to shifting market dynamics &mdash; but far fewer studies
+        of comparable depth have been conducted from a humanistic
+        perspective. That gap matters: the behaviors of passengers changed a
+        great deal during and after COVID-19, and ignoring them has a
+        worrying real-world consequence, since the number of disruptive
+        passengers reported to the Federal Aviation Administration rose
+        sharply after the pandemic, contributing to delayed and canceled
+        flights. We wanted to look at the effect of COVID-19 from the
+        perspective of passengers &mdash; the "main character" that
+        quantitative research on this topic often shrinks to a number
+        &mdash; and to explore the human justifications behind the business
+        decisions airlines made, and the social reasons behind the rise of
+        so-called "revenge travel."
+      </p>
+      <p>
+        Our team's motivation is to bring a humanistic perspective to the
+        T-100 dataset, treating aviation as more than a spreadsheet of
+        airlines, passenger counts, and load factors. We wanted to use this
+        data to trace how the pandemic reshaped not just <em>where</em>
+        planes flew, but why people got on them, and what that tells us
+        about how flight itself was understood at that moment in history.
+        Our research question follows directly from that goal:
+      </p>
+      <p style="font-family: var(--font-display); font-size: 1.25rem; color: var(--navy-900); font-weight: 600;">
+        How did COVID-19 travel restrictions affect commercial air passenger
+        volume, flight distances, and route networks across the ten largest
+        U.S. metropolitan areas &mdash; and to what extent, and how evenly,
+        had these patterns recovered by 2025?
+      </p>
+
+      <h2>Literature Review</h2>
+      <p>
+        Existing literature on aviation during COVID-19 largely aims to
+        explain how the industry changed since the outbreak. A recurring
+        finding is that classical statistical demand-forecasting models
+        stopped working once travel restrictions began shifting faster than
+        the models could adapt (Jafari 2022). Scholars generally agree that
+        business travel recovered slowly as remote work became normalized,
+        while leisure travel rebounded almost immediately once lockdowns
+        eased &mdash; a rebound dramatic enough that researchers coined the
+        term "revenge travel." Where the literature disagrees is on whether
+        this shift is temporary or permanent, and who benefited most from
+        it. Some scholars argue legacy carriers and major hub airports won
+        passengers back fastest on the strength of larger, wealthier
+        catchment populations. Others, including Higgins-Desbiolles (2022),
+        argue that low-cost carriers benefited more because "the pandemic
+        also sparked greater focus on the value of regional tourism and
+        travel," pulling travelers toward secondary airports and direct
+        regional routes.
+      </p>
+      <p>
+        We think many questions remain open. Revenge travel brought
+        much-needed revenue relief to the industry, but its long-term
+        sustainability is untested, and it is not clear whether airlines can
+        generate enough revenue from leisure travelers to fully replace lost
+        business clients &mdash; a possibility supported by Javadinasr et al.
+        (2022)'s national panel survey, in which 48% of respondents expected
+        to retain the option to work from home after the pandemic and 41% of
+        pre-pandemic business travelers expected to fly less going forward.
+        That is the gap our project sits in: not whether air travel
+        recovered, but what its uneven recovery reveals about how people's
+        priorities and geography changed.
+      </p>
+
+      <h2 id="timeline">A Pandemic in Five Years</h2>
+      <p>
+        Before turning to our own data, it helps to place it against the
+        public-health and policy timeline that produced it. The timeline
+        below pairs the major events of the pandemic with two figures from
+        our own analysis: the exact month passenger volume bottomed out, and
+        the year national totals finally climbed back above their 2019
+        baseline.
+      </p>
+      <iframe id="timeline-embed" src="timeline.html" title="COVID-19 and American Air Travel Timeline" loading="lazy"></iframe>
+      <p class="chart-caption">
+        Built with <a href="https://timeline.knightlab.com/" target="_blank" rel="noopener">TimelineJS</a>
+        from Northwestern University's Knight Lab, using our own JSON data source at
+        <code>assets/data/timeline.json</code>.
+      </p>
+
+      <h2 id="volume">How Many People Flew, and How Full Were the Planes?</h2>
+      <p>
+        Our first humanities question is the most direct one: how much did
+        the pandemic actually reduce flying, and did the industry recover by
+        restoring its old schedule or by rethinking it? Across the ten metro
+        areas we studied, total annual passengers fell 61.8% between 2019
+        and 2020 &mdash; a drop with no precedent in the modern history of
+        U.S. commercial aviation &mdash; before climbing back past the 2019
+        baseline by 2024.
+      </p>
       <div class="chart-panel">
         <h3>Total National Passenger Volume by Year</h3>
         <div class="chart-wrap"><canvas id="chart-national"></canvas></div>
         <p class="chart-caption">
-          2020 (highlighted) marks the low point: a 61.8% drop from 2019.
-          The climb back took four full years, finally surpassing the 2019
-          baseline in 2024.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt" id="recovery">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">02 &middot; The Recovery Gap</span>
-        <h2>"Recovered" Doesn't Mean Everywhere</h2>
-        <p>
-          The national total crossing back above 2019 levels in 2024 is a
-          convenient headline &mdash; but it averages away a real split. When
-          we break the same comparison out by metro area, four of the ten
-          largest markets were still below their 2019 passenger volume as of
-          2025, five years after the pandemic began.
-        </p>
-      </div>
-      <div class="chart-panel">
-        <h3>Passenger Volume Change, 2025 vs. 2019, by Metro Area</h3>
-        <div class="chart-wrap" style="height: 420px;"><canvas id="chart-recovery"></canvas></div>
-        <p class="chart-caption">
-          Sun Belt markets &mdash; Dallas&ndash;Fort Worth, Phoenix, Miami
-          &mdash; grew well past their pre-pandemic baseline. Older,
-          slower-growing hubs like Los Angeles and Philadelphia still hadn't
-          caught up.
+          Sum of monthly passengers across Atlanta, Chicago,
+          Dallas&ndash;Fort Worth, Houston, Los Angeles, Miami, New York,
+          Philadelphia, Phoenix, and Washington DC, 2019&ndash;2025.
+          Source: BTS T-100 Segment, aggregated by our team.
         </p>
       </div>
       <p>
-        This lines up with a broader pattern often called the "Southward
-        Expansion" &mdash; population and business activity shifting toward
-        Sun Belt metros. Air travel demand appears to be following the same
-        gravity: growing fastest where the underlying population and economy
-        are growing fastest, and lagging where they aren't.
+        But a rebound in total passengers is not the same as a rebound in
+        service. Total departures across our ten metro areas were still
+        9.1% below 2019 levels in 2023, even as passenger counts had nearly
+        closed the gap &mdash; meaning the average flight was carrying
+        significantly more people than it had before the pandemic. Our
+        team's broader analysis of the T-100 dataset's domestic/international
+        split confirms this directly: average domestic passengers per
+        departure fell from 95 in 2019 to 65 during the 2020 collapse, then
+        climbed <em>past</em> its pre-pandemic level to roughly 106 by 2023
+        before settling near 101 in 2025. International flights followed the
+        same arc, from 150 down to 110 and back up to about 158.
       </p>
-    </div>
-  </section>
-
-  <section class="section" id="distance">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">03 &middot; Fewer, Longer Flights</span>
-        <h2>The Network Got Leaner and Longer-Haul</h2>
-        <p>
-          Passenger counts weren't the only thing that changed. Total
-          departures across our ten metro areas were still 9.1% below 2019
-          levels in 2023 &mdash; even as passenger volume had nearly closed
-          the gap. At the same time, the average distance of a nonstop
-          segment grew from about 1,069 miles in 2019 to roughly 1,102 miles
-          in 2023.
+      <div class="chart-panel">
+        <h3>Average Passengers per Departure, Domestic vs. International</h3>
+        <div class="chart-wrap"><canvas id="chart-pax-departure"></canvas></div>
+        <p class="chart-caption">
+          Figures from our team's domestic/international T-100 breakdown
+          analysis (2023 international figure not separately reported).
+          When compared against total departures remaining below 2019
+          levels, this indicates airlines met recovering demand by
+          concentrating it onto fewer, larger, fuller aircraft rather than
+          restoring the full pre-pandemic flight schedule.
         </p>
       </div>
+      <p>
+        This is where a purely operational reading of the data and a
+        humanities reading start to diverge. Fewer flights carrying more
+        people per departure is, in one sense, a more fuel-efficient
+        system &mdash; fewer of the takeoff-and-landing cycles that are the
+        most fuel-intensive phase of flight. But it is also a less
+        convenient one for travelers, especially those in smaller cities
+        who may have lost direct service entirely. What reads in an
+        operations report as improved efficiency reads, from a passenger's
+        seat, as fewer choices and more crowded planes.
+      </p>
+
+      <figure style="margin: 40px 0;">
+        <svg viewBox="0 0 400 200" role="img" aria-labelledby="illo1-title" style="width:100%; max-width:420px; display:block; margin:0 auto; background:var(--cream-100); border-radius:var(--radius);">
+          <title id="illo1-title">Illustration of a grounded airplane, 2020</title>
+          <line x1="20" y1="165" x2="380" y2="165" stroke="#e4ddca" stroke-width="2"/>
+          <ellipse cx="150" cy="130" rx="10" ry="4" fill="#e8cf9a" opacity="0.6"/>
+          <ellipse cx="270" cy="150" rx="14" ry="5" fill="#e8cf9a" opacity="0.6"/>
+          <g fill="none" stroke="#12294a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M90,130 Q100,110 140,108 L260,108 Q300,108 305,122 L300,132 Q260,140 140,140 Q100,140 90,130 Z"/>
+            <path d="M170,108 L185,60 L200,60 L195,108 Z"/>
+            <path d="M255,110 L285,80 L290,84 L268,112 Z"/>
+          </g>
+          <circle cx="150" cy="120" r="4" fill="#c9a24b"/>
+          <line x1="150" y1="140" x2="145" y2="163" stroke="#12294a" stroke-width="3"/>
+          <line x1="245" y1="140" x2="250" y2="163" stroke="#12294a" stroke-width="3"/>
+          <path d="M136,163 L154,163 L148,172 L142,172 Z" fill="#a4432f"/>
+          <path d="M241,163 L259,163 L253,172 L247,172 Z" fill="#a4432f"/>
+          <g stroke="#3f6b4a" stroke-width="2" stroke-linecap="round">
+            <path d="M60,165 q3,-8 0,-14"/>
+            <path d="M67,165 q3,-10 0,-16"/>
+            <path d="M320,165 q3,-8 0,-14"/>
+          </g>
+        </svg>
+        <figcaption class="chart-caption" style="text-align:center;">
+          <strong>Grounded, 2020.</strong> Original illustration for SkyStats
+          by Kyaw Htet Aung, symbolizing the historic idling of fleets during
+          the pandemic's steepest travel restrictions.
+        </figcaption>
+      </figure>
+
+      <h2 id="seasonality">Did the Shape of the Year Come Back?</h2>
+      <p>
+        A second question is whether the pandemic permanently changed the
+        rhythm of air travel, or only paused it. Comparing monthly passenger
+        totals for 2019, 2020, and 2025 side by side shows something
+        striking: the 2025 line retraces the 2019 seasonal curve almost
+        exactly &mdash; the same summer peak, the same early-year dip
+        &mdash; even in a year when several individual metro areas still had
+        not returned to their 2019 passenger volumes.
+      </p>
+      <div class="chart-panel">
+        <h3>Monthly Passenger Volume: 2019 vs. 2020 vs. 2025</h3>
+        <div class="chart-wrap"><canvas id="chart-monthly"></canvas></div>
+        <p class="chart-caption">
+          National sum across our ten metro areas. April 2020 is the low
+          point of the entire dataset, at roughly 1.4 million passengers
+          &mdash; a 96% collapse from April 2019.
+        </p>
+      </div>
+      <p>
+        In other words, the pandemic reshaped <em>how much</em> people flew
+        and, as we show next, <em>where</em>, but it did not permanently
+        reshape <em>when</em> in the year Americans choose to travel. That
+        stability is itself a humanities finding: it suggests the cultural
+        rhythm of summer vacation and holiday travel proved more durable
+        than the industry's route network or fleet schedules.
+      </p>
+
+      <h2 id="geography">Which Places Came Back, and Which Didn't?</h2>
+      <p>
+        National totals average away a much more uneven story underneath.
+        Plotting all ten metro areas' monthly passenger totals together
+        reveals that the pandemic reordered which cities anchor American air
+        travel, at least temporarily. New York, which normally carries the
+        most passengers of any metro in our dataset, was overtaken for all
+        of the second half of 2020 by Dallas&ndash;Fort Worth &mdash; a
+        conservative state with comparatively fewer travel restrictions than
+        New York's. By contrast, Miami has popped up as the second-busiest
+        metro in our dataset every January and February since 2022, driven
+        by winter tourism, before dropping back down for the rest of the
+        year. And Los Angeles, still the second-largest metro in our
+        dataset by population, was overtaken by Atlanta for the full 2025
+        calendar year &mdash; the clearest sign in our data that recovery
+        was not simply proportional to a city's pre-pandemic size.
+      </p>
+      <div class="chart-panel">
+        <h3>Monthly Passenger Traffic by Metro Area, 2019&ndash;2025</h3>
+        <div class="chart-wrap" style="height: 420px;"><canvas id="chart-msa-monthly"></canvas></div>
+        <p class="chart-caption">
+          All ten metro areas, monthly, with a reference line at March 2020
+          marking the U.S. national emergency declaration. Notice
+          Dallas&ndash;Fort Worth's lead through the second half of 2020 and
+          Miami's recurring winter spikes.
+        </p>
+      </div>
+      <p>
+        Zooming out from month-to-month swings to the full five-year
+        picture, the unevenness becomes even clearer. Comparing each metro's
+        2025 passenger total against its own 2019 baseline shows that four
+        of our ten metro areas &mdash; Atlanta, Chicago, Los Angeles, and
+        Philadelphia &mdash; still had not returned to their pre-pandemic
+        volume as of 2025, even though the national sum had.
+      </p>
+      <div class="chart-panel" id="recovery">
+        <h3>Passenger Volume Change, 2025 vs. 2019, by Metro Area</h3>
+        <div class="chart-wrap" style="height: 380px;"><canvas id="chart-recovery"></canvas></div>
+        <p class="chart-caption">
+          Sun Belt metros &mdash; Dallas&ndash;Fort Worth, Phoenix, Miami
+          &mdash; grew well past their pre-pandemic baseline; older,
+          slower-growing metros like Los Angeles and Philadelphia still
+          hadn't caught up five years later.
+        </p>
+      </div>
+
+      <h2 id="map">Mapping an Uneven Recovery</h2>
+      <p>
+        To see whether this unevenness has a geographic logic, we built a
+        proportional-symbol map: each metro area is a bubble sized by its
+        2019 passenger volume, colored on a red-to-blue scale by how fully
+        it had recovered by 2025. The map makes visible what the bar chart
+        above only implies &mdash; recovery clusters geographically. Blue,
+        "recovered" bubbles concentrate in the South and Southwest, while
+        red, "still behind" bubbles sit in the Northeast and along the
+        Pacific coast.
+      </p>
+      <div class="chart-panel">
+        <h3>2025 Recovery by Metro Area (bubble size = 2019 passenger volume)</h3>
+        <div id="recovery-map"></div>
+        <div class="map-legend">
+          <span><span class="swatch" style="background:#a4432f;"></span>&minus;8% or worse</span>
+          <span><span class="swatch" style="background:#c97a5f;"></span>&minus;3% to &minus;8%</span>
+          <span><span class="swatch" style="background:#c9a24b;"></span>within &plusmn;3%</span>
+          <span><span class="swatch" style="background:#6d8f78;"></span>+3% to +9%</span>
+          <span><span class="swatch" style="background:#3f6b4a;"></span>+9% or better</span>
+        </div>
+        <p class="chart-caption">
+          Built with <a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet.js</a>
+          and OpenStreetMap/CARTO basemap tiles. Hover a bubble for exact
+          figures. Coordinates approximate each metro area's principal
+          airport or city center.
+        </p>
+      </div>
+      <p>
+        This spatial pattern lines up with what demographers call the
+        "Southward Expansion" &mdash; population and business activity
+        migrating toward the Sun Belt. Gao (2022) clustered 118 U.S. hub
+        airports by their pandemic recovery trajectories and found that
+        geography significantly shaped recovery speed, confirming that
+        recovery varied by region rather than proceeding uniformly. The lag
+        in large coastal metros is also consistent with Javadinasr et al.
+        (2022)'s finding that permanent increases in remote work were
+        expected to reduce business air travel most in exactly the kind of
+        corporate-travel-heavy hubs &mdash; Los Angeles, New York,
+        Philadelphia &mdash; where our data shows the weakest recovery. Air
+        travel, in other words, did not simply bounce back to where it had
+        been; it followed people and capital toward where they were already
+        heading.
+      </p>
+
+      <figure style="margin: 40px 0;">
+        <svg viewBox="0 0 400 200" role="img" aria-labelledby="illo2-title" style="width:100%; max-width:420px; display:block; margin:0 auto; background:var(--navy-900); border-radius:var(--radius);">
+          <title id="illo2-title">Illustration of a hub-and-spoke route network</title>
+          <g stroke="#d9b869" stroke-width="1.5" fill="none" opacity="0.85">
+            <path d="M60,50 Q140,80 200,100"/>
+            <path d="M60,150 Q140,120 200,100"/>
+            <path d="M340,40 Q270,70 200,100"/>
+            <path d="M340,160 Q270,130 200,100"/>
+            <path d="M200,20 Q200,60 200,100"/>
+            <path d="M200,180 Q200,140 200,100"/>
+            <path d="M40,100 Q120,100 200,100"/>
+            <path d="M360,100 Q280,100 200,100"/>
+          </g>
+          <g fill="#e8cf9a">
+            <circle cx="60" cy="50" r="4"/>
+            <circle cx="60" cy="150" r="4"/>
+            <circle cx="340" cy="40" r="4"/>
+            <circle cx="340" cy="160" r="4"/>
+            <circle cx="200" cy="20" r="4"/>
+            <circle cx="200" cy="180" r="4"/>
+            <circle cx="40" cy="100" r="4"/>
+            <circle cx="360" cy="100" r="4"/>
+          </g>
+          <circle cx="200" cy="100" r="10" fill="#c9a24b"/>
+        </svg>
+        <figcaption class="chart-caption" style="text-align:center;">
+          <strong>The Hub, Reconnected.</strong> Original illustration for
+          SkyStats by Kyaw Htet Aung, depicting the hub-and-spoke
+          consolidation described in our route-network findings.
+        </figcaption>
+      </figure>
+
+      <h2 id="distance">Fewer Flights, Longer Routes</h2>
+      <p>
+        Our last question turns from <em>who</em> recovered to
+        <em>how</em> the shape of the network itself changed. If airlines
+        met demand with fewer, fuller flights, did they also change the
+        <em>kind</em> of routes they flew? Average nonstop segment distance
+        across our ten metro areas fell from about 1,069 miles in 2019 to
+        1,012 miles during the 2021 trough, before growing past its
+        pre-pandemic level to roughly 1,102 miles by 2023 &mdash; even as
+        total departures remained below their 2019 count.
+      </p>
       <div class="chart-panel">
         <h3>Average Flight Distance vs. Total Departures</h3>
         <div class="chart-wrap"><canvas id="chart-distance"></canvas></div>
         <p class="chart-caption">
           Departures dipped sharply in 2021 and were still recovering by
-          2023, while average segment length grew past its 2019 level &mdash;
-          consistent with airlines consolidating capacity onto fewer, longer
-          routes rather than restoring every short regional hop.
+          2023, while average segment length grew past its 2019 level,
+          consistent with airlines consolidating capacity onto fewer,
+          longer routes.
         </p>
       </div>
       <p>
-        Put together, this suggests airlines didn't just scale service back
-        during the pandemic and then scale it back up the same way. They
-        appear to have restructured toward serving demand with fewer, larger
-        aircraft on longer routes &mdash; consistent with industry-wide cost
-        pressures and labor shortages (including a widely reported pilot
-        shortage) that persisted well into the recovery period.
+        This finding echoes what Bao et al. (2021) describe at a global
+        scale: the pandemic did not just shrink the world's air
+        transportation network, it reorganized it, concentrating
+        connectivity onto fewer, more heavily trafficked links. Sugishita,
+        Mizutani, and Hanaoka (2024) find a similar pattern specific to U.S.
+        domestic networks. Distinguishing route restoration from traffic
+        concentration is, we think, one of the most important humanities
+        insights of this project: a national passenger total recovering
+        does not mean the geographic web connecting American communities
+        recovered with it. Losing a route is not only a change in a
+        transportation statistic &mdash; it is a weakening of the
+        connection between families, workplaces, and regional economies
+        that depended on it.
       </p>
-    </div>
-  </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Takeaways</span>
-        <h2>What the Data Tells Us</h2>
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <h3>The shock was historic</h3>
-          <p>A 61.8% drop in national passenger volume in a single year has no modern precedent in U.S. commercial aviation.</p>
-        </div>
-        <div class="card">
-          <h3>Recovery was uneven</h3>
-          <p>National averages mask real metro-level divergence &mdash; growth markets pulled ahead while others lagged behind for years.</p>
-        </div>
-        <div class="card">
-          <h3>The network restructured</h3>
-          <p>Airlines emerged with fewer departures but longer average routes, reshaping how connectivity is distributed across the country.</p>
-        </div>
-      </div>
+      <h2>Conclusion</h2>
+      <p>
+        Read together, our visualizations, timeline, and map tell a story
+        that a single "recovery" statistic cannot: American air travel did
+        not simply pause and resume in 2020&ndash;2025. It collapsed by
+        61.8% almost overnight, came back on a faster, more concentrated
+        schedule of fewer and fuller flights, retraced its old seasonal
+        rhythm almost exactly, and redistributed itself geographically
+        toward the Sun Belt while leaving several of its largest, oldest
+        hubs still below their pre-pandemic baseline five years later. None
+        of this is visible in the T-100 dataset's raw operational categories
+        alone &mdash; as our <a href="data-critique.html">Data Critique</a>
+        argues, the dataset was built to track industry throughput, not
+        human experience. It took combining that operational record with
+        secondary sources on remote work, regional tourism, and behavioral
+        change to turn seven years of flight segments into an account of
+        who was flying, why, and who got left on the ground.
+      </p>
+
     </div>
   </section>
 
@@ -201,7 +460,9 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/charts.js"></script>
+  <script src="assets/js/map.js"></script>
 </body>
 </html>
