@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — SkyStats</title>
-  <meta name="description" content="Meet Group 2, the DH 101 team behind SkyStats, and learn about the project's goals." />
+  <meta name="description" content="How SkyStats was built at the source, processing, and presentation levels, who built it, and who helped." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -56,24 +56,27 @@
     <div class="container two-col">
       <div>
         <span class="eyebrow">Our Goal</span>
-        <h2>Turning Federal Flight Data Into a Story</h2>
+        <h2>Numbers Aren't the Whole Story</h2>
       </div>
       <div>
         <p>
-          Millions of rows of federal flight-operations data can tell us a lot
-          about how the aviation industry runs &mdash; but on their own, they
-          don't tell a story. Our goal with SkyStats was to take the Bureau of
-          Transportation Statistics' T-100 Segment dataset and turn it into a
-          clear, honest account of what actually happened to American air
-          travel during and after the COVID-19 pandemic: who stopped flying,
-          who came back, and who still hasn't.
+          Our team's goal is to bring a humanistic perspective to the T-100
+          dataset, allowing aviation to be viewed as more than a spreadsheet.
+          Airlines, passenger counts, load factors, and route profitability
+          are all variables drawn from the database, but our motivation lies
+          in the behavioral and social reasons behind those numbers. What did
+          it mean that leisure travel rebounded almost immediately after
+          lockdowns lifted while business travel struggled for years? What
+          does it say about the people living through the pandemic that some
+          metro areas' airports recovered while others, like Los Angeles,
+          did not?
         </p>
         <p>
-          We focused on the ten largest U.S. metropolitan areas by air traffic
-          volume &mdash; Atlanta, Chicago, Dallas&ndash;Fort Worth, Houston,
-          Los Angeles, Miami, New York, Philadelphia, Phoenix, and Washington
-          DC &mdash; and tracked monthly passengers, departures, and flight
-          distances from 2019 through 2025.
+          With this project, we wanted to push past a narrative that treats
+          air traffic purely as numbers. By tracing how "revenge travel"
+          unfolded, we hoped to understand who was flying, why they chose to
+          fly, and how those behavioral choices reshaped the airline route
+          network from before the pandemic to after it.
         </p>
       </div>
     </div>
@@ -82,59 +85,268 @@
   <section class="section section-alt">
     <div class="container">
       <div class="section-head">
+        <span class="eyebrow">Methodology</span>
+        <h2>The Three Levels of This Project</h2>
+        <p>
+          Every digital humanities project is built at three interdependent
+          levels &mdash; sources, processing, and presentation &mdash; and the
+          decisions made at each level shape what questions can be asked and
+          answered. As Johanna Drucker writes, "the source level of the
+          project refers not only to materials gathered by the researcher,
+          but also to the decisions made in selecting and organizing them."<sup>1</sup>
+          Here is our accounting of those decisions.
+        </p>
+      </div>
+
+      <div class="card-grid" style="grid-template-columns: 1fr; gap: 34px;">
+        <div class="card" style="border-top-color: var(--gold-500);">
+          <h3>1. Sources</h3>
+          <p>
+            Our primary source is the T-100 Segment dataset from the U.S.
+            Bureau of Transportation Statistics. To study how COVID-19
+            affected air travel and how recovery proceeded differently
+            across the airline network, we used data from 2019 through 2025.
+            2019 was chosen as our baseline because it is the last full year
+            without pandemic-related disruption, letting us measure both the
+            initial 2020 collapse and the degree of recovery through 2025.
+          </p>
+          <p>
+            This dataset suited our project because it let us examine
+            passenger activity from several angles at once: flight distance
+            let us compare short-, medium-, and long-haul travel; origin and
+            destination fields gave us route-level information; and yearly
+            passenger totals let us trace the recovery process over time.
+            Secondary sources from our <a href="sources.html">annotated
+            bibliography</a> supply the historical, political, economic, and
+            social background that raw traffic numbers cannot &mdash; they
+            explain <em>why</em> the patterns we found occurred, in relation
+            to public health restrictions, changing behavior, economic
+            uncertainty, and reopening policy. Choosing the T-100 dataset,
+            concentrating on 2019&ndash;2025, setting 2019 as the baseline,
+            and organizing records by distance, passengers, and routes were
+            all decisions that shaped which questions we could ask and how
+            we could interpret our subject.
+          </p>
+        </div>
+
+        <div class="card" style="border-top-color: var(--gold-500);">
+          <h3>2. Processing</h3>
+          <p>
+            Data was processed and analyzed primarily in R, which let us
+            combine multi-year airline data, produce summaries, compare
+            categories, and generate visualizations in one cohesive
+            analytical pipeline (Tableau and Flourish were used for several
+            of our maps and charts). We first loaded and combined the yearly
+            datasets so we could analyze change across the full
+            2019&ndash;2025 period, then selected the variables relevant to
+            our research questions: year, month, origin, destination,
+            distance, passengers, and related indicators of airline activity.
+          </p>
+          <p>
+            Because our raw data consists of individual flight segments, we
+            had to organize it in ways that could answer humanities
+            questions, not just report totals. For distance analysis, we
+            split flights into three groups &mdash; short-haul (under 500
+            miles), medium-haul (500&ndash;1,499 miles), and long-haul (1,500
+            miles or more) &mdash; because without grouping, there would be
+            too many distinct distances to compare meaningfully. We then
+            calculated a <strong>Passenger Recovery Index</strong> for each
+            category:
+          </p>
+          <div class="callout">
+            <h4>Passenger Recovery Index</h4>
+            <p>
+              Passenger Total in Selected Year &divide; Passenger Total in
+              2019 &times; 100. An index of 100 means activity equals 2019
+              levels; below 100 means travel is still suppressed; above 100
+              means it has exceeded its pre-pandemic baseline.
+            </p>
+          </div>
+          <p>
+            Route-level analysis required a different process. We compared
+            each year's active routes against 2019's to build a
+            <strong>Route Restoration Index</strong> &mdash; the share of
+            2019 routes still active in a given year &mdash; and separately a
+            <strong>Common Route Traffic Index</strong> &mdash; passenger
+            activity only on routes that existed in both 2019 and the
+            selected year. Distinguishing these two indexes was essential to
+            our findings: it let us tell whether recovery came from
+            restoring the airline network's geographic reach, or simply from
+            concentrating more passengers onto the routes that survived.
+            Processing was not just data cleaning; as Drucker argues,
+            computational processing forces the researcher to make
+            categories, relations, and analytical constructs.<sup>2</sup> Our
+            distance categories, recovery index, route comparisons, and 2019
+            baseline were all constructed analytical choices, and we
+            documented each of our calculations so readers can judge for
+            themselves whether they were suitable for the questions we asked.
+          </p>
+        </div>
+
+        <div class="card" style="border-top-color: var(--gold-500);">
+          <h3>3. Presentation</h3>
+          <p>
+            SkyStats is designed as a web-based mini-site combining written
+            narrative, data visualizations, a map, a timeline, an annotated
+            bibliography, a data critique, and project and author
+            information. This layout lets readers move back and forth
+            between numerical evidence, geographic patterns, historical
+            background, and written interpretation, rather than encountering
+            charts as disconnected graphics. Every visualization on our
+            <a href="narrative.html">Narrative</a> page is embedded directly
+            in the surrounding text and answers a specific humanities
+            question; none stand alone without explanation of what a reader
+            should notice, how it relates to our research questions, and why
+            it matters.
+          </p>
+          <p>
+            The site is written for an educated general audience rather than
+            aviation specialists: technical variable names are translated
+            into plain language, and every chart carries a title, axis
+            labels, a caption, and a source. As Cole Nussbaumer Knaflic
+            argues, a good data story presents only the information
+            necessary to make its point, without excess visuals distracting
+            the audience<sup>3</sup> &mdash; so we kept each visualization
+            focused on the single question it was built to answer, favoring
+            reference lines, annotations, and consistent category ordering
+            over decoration. This also follows Drucker's claim that digital
+            interfaces and visualizations are interpretative structures, not
+            a neutral container for data.<sup>4</sup> The ordering of our
+            pages, the placement of our charts, our choice of chart types,
+            and the transitions in our written narrative all actively
+            construct the meaning of our evidence &mdash; they do not simply
+            display it.
+          </p>
+        </div>
+      </div>
+
+      <p style="font-size: 0.82rem; color: var(--ink-500); margin-top: 28px;">
+        1, 2, 4. Drucker, Johanna. "Humanities Approaches to Graphical
+        Display." <em>Digital Humanities Quarterly</em> 5, no. 1 (2011).
+        &nbsp;3. Knaflic, Cole Nussbaumer. <em>Storytelling with Data: A Data
+        Visualization Guide for Business Professionals</em>. Hoboken: Wiley,
+        2015.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
         <span class="eyebrow">The Team</span>
-        <h2>Who Built This</h2>
+        <h2>Who Built This, and What They Did</h2>
         <p>Six DH 101 students, each contributing across research, data, design, and writing.</p>
       </div>
       <div class="team-grid">
 
         <div class="team-card">
-          <div class="team-avatar">KA</div>
-          <h3>Kyaw Htet Aung</h3>
-          <div class="team-role">Web Designer &middot; Content &middot; Editor</div>
-          <p>Built and designed the SkyStats website, and contributed to writing and editing the narrative.</p>
-        </div>
-
-        <div class="team-card">
-          <div class="team-avatar">SW</div>
-          <h3>Shelley Wang</h3>
-          <div class="team-role">Content Developer &middot; Editor</div>
-          <p>Helped author the project narrative and edit the site's written content for clarity and accuracy.</p>
-        </div>
-
-        <div class="team-card">
-          <div class="team-avatar">CV</div>
-          <h3>Calvin Vo</h3>
-          <div class="team-role">Content Developer &middot; Editor</div>
-          <p>Focused on the domestic vs. international dimension of the pandemic's impact on air travel.</p>
+          <div class="team-avatar">SM</div>
+          <h3>Sarah Min</h3>
+          <div class="team-role">Data Visualization &middot; Project Manager</div>
+          <p>
+            Rising senior studying Statistics and Data Science. Sarah's
+            interest in this project is personal: COVID-19 separated her
+            family from relatives in South Korea for over two years, when
+            digital communication became vital to staying connected. She
+            wants to use data and AI to advance humanity rather than take
+            away from it.
+          </p>
+          <p><strong>Contributions:</strong> led data visualization work and
+          kept the team on schedule as project manager; built the
+          proportional-symbol recovery map in Flourish; drafted the
+          happiness/air-travel-collapse research question and visualization.</p>
         </div>
 
         <div class="team-card">
           <div class="team-avatar">QX</div>
           <h3>Qichuan Xia</h3>
           <div class="team-role">Data Specialist</div>
-          <p>Cleaned and standardized the T-100 dataset and supported data visualization and narrative writing.</p>
+          <p>
+            Graduating senior majoring in Statistics and Data Science,
+            minoring in Mathematics, headed to graduate study in aviation.
+            Qichuan experienced one of the pandemic's stricter travel
+            restrictions firsthand in Canberra, Australia, where an
+            interstate travel ban confined the territory for extended
+            lockdown periods.
+          </p>
+          <p><strong>Contributions:</strong> primary advocate for choosing
+          the T-100 dataset; authored the data critique across two rounds of
+          revision; designed and annotated the GIS busiest-routes map using
+          R and OpenFlights data; drafted and edited the introduction and
+          literature review; coordinated team progress.</p>
         </div>
 
         <div class="team-card">
-          <div class="team-avatar">SM</div>
-          <h3>Sarah Min</h3>
-          <div class="team-role">Data Visualization &middot; Project Manager</div>
-          <p>Led data visualization work and kept the team on schedule as project manager.</p>
+          <div class="team-avatar">KA</div>
+          <h3>Kyaw Htet Aung</h3>
+          <div class="team-role">Web Designer &middot; Content &middot; Editor</div>
+          <p>
+            Rising senior majoring in Statistics and Data Science, minoring
+            in Data Science Engineering, originally from Burma. When
+            COVID-19 began, Kyaw was planning to study abroad; international
+            flights shut down for a long stretch and several national exams
+            were canceled, delaying his education.
+          </p>
+          <p><strong>Contributions:</strong> designed and built the SkyStats
+          website; organized the site layout and navigation; integrated the
+          team's visualizations, map, and timeline into the narrative; kept
+          the site updated as the project developed.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">CV</div>
+          <h3>Calvin Vo</h3>
+          <div class="team-role">Content Developer &middot; Editor</div>
+          <p>
+            Upcoming senior majoring in Statistics and Data Science. As an
+            Asian-American student, Calvin faced stereotypes tied to
+            COVID-19's origins, and watched the pandemic upend friends' 2020
+            travel plans &mdash; experiences that motivated his interest in
+            this topic.
+          </p>
+          <p><strong>Contributions:</strong> wrote and revised large portions
+          of the narrative; focused on the domestic-versus-international
+          dimension of the pandemic's impact; built several maps in Tableau;
+          edited the narrative for consistency.</p>
         </div>
 
         <div class="team-card">
           <div class="team-avatar">WH</div>
           <h3>Wenkang Huang</h3>
           <div class="team-role">Data Specialist &middot; Web Design</div>
-          <p>Worked across data cleaning, visualization, and site development.</p>
+          <p>
+            Junior studying Statistics at UCLA. Wenkang's interest is
+            personal: he and his family recently faced first-hand
+            difficulties booking flights to the United States, including
+            high ticket costs, which left him wanting to understand the
+            scale of such problems from a data perspective.
+          </p>
+          <p><strong>Contributions:</strong> cleaned and standardized data
+          from three source files in Tableau, removing duplicates and
+          handling missing values; created trend, comparison, and map
+          visualizations; contributed to the route-restoration analysis and
+          web design.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">SW</div>
+          <h3>Shelley Wang</h3>
+          <div class="team-role">Content Developer &middot; Editor</div>
+          <p>
+            Contributed throughout the project as a content developer and
+            editor, helping author the project narrative and ensuring the
+            site's written content was clear, accurate, and consistent
+            across pages.
+          </p>
+          <p><strong>Contributions:</strong> narrative writing and editing;
+          reviewed drafts for clarity, grammar, and organization.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="container two-col">
       <div>
         <span class="eyebrow">How We Worked</span>
@@ -153,6 +365,24 @@
           Decisions were made by majority rule with a strong preference for
           compromise, and we prioritized starting tasks early so there was
           always time left to review each other's work before deadlines.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">Acknowledgments</span>
+        <h2>Thank You</h2>
+      </div>
+      <div>
+        <p>
+          We thank <strong>Dr. Jordan Galczynski</strong> for feedback that
+          directly shaped a stronger second edition of our data critique, and
+          our DH 101 instructional team more broadly for guidance throughout
+          the quarter on working responsibly with data, sources, and
+          digital-humanities methods.
         </p>
       </div>
     </div>

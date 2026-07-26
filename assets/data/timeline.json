@@ -1,0 +1,87 @@
+{
+  "title": {
+    "text": {
+      "headline": "COVID-19 &amp; American Air Travel",
+      "text": "<p>Key public-health and policy events alongside the passenger numbers from our own T-100 analysis of the ten largest U.S. metro areas.</p>"
+    }
+  },
+  "events": [
+    {
+      "start_date": { "year": "2020", "month": "1", "day": "30" },
+      "text": {
+        "headline": "WHO Declares a Global Emergency",
+        "text": "<p>The World Health Organization declares COVID-19 a Public Health Emergency of International Concern, the first formal signal of a coming disruption to global travel.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2020", "month": "1", "day": "31" },
+      "text": {
+        "headline": "U.S. Restricts Travel From China",
+        "text": "<p>The United States announces restrictions on entry for most travelers who had recently been in China, an early sign that international air travel would be first to feel the shock.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2020", "month": "3", "day": "11" },
+      "text": {
+        "headline": "Pandemic Declared; Europe Travel Ban",
+        "text": "<p>The WHO declares COVID-19 a pandemic. The U.S. announces a 30-day suspension of travel from most of Europe, taking effect March 13.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2020", "month": "3", "day": "13" },
+      "text": {
+        "headline": "U.S. National Emergency Declared",
+        "text": "<p>A national emergency is declared, and states begin issuing stay-at-home orders in the following weeks. Business and leisure travel both begin their steepest collapse.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2020", "month": "4" },
+      "text": {
+        "headline": "Passenger Volume Bottoms Out",
+        "text": "<p>In our own data, April 2020 is the low point: the ten metro areas we studied carried only about 1.4 million passengers, down from 35.2 million in April 2019 &mdash; a 96% collapse in a single year.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2021", "month": "1" },
+      "text": {
+        "headline": "Federal Mask Mandate for Travel",
+        "text": "<p>A federal mandate requires masks on commercial aircraft and in transit hubs, formalizing pandemic-era travel conditions as vaccines begin rolling out nationally.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2021", "month": "11", "day": "8" },
+      "text": {
+        "headline": "U.S. Reopens to Vaccinated Travelers",
+        "text": "<p>The United States lifts pandemic-era entry restrictions for fully vaccinated international visitors, a turning point our data shows in the following year's international recovery.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2022", "month": "4", "day": "18" },
+      "text": {
+        "headline": "Transportation Mask Mandate Ends",
+        "text": "<p>A federal court ruling voids the transportation mask mandate; airlines drop the requirement the same day, symbolically closing the acute phase of the pandemic for air travel.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2022", "month": "6" },
+      "text": {
+        "headline": "\"Revenge Travel\" Summer",
+        "text": "<p>Leisure travel surges through summer 2022 even as business travel remains depressed &mdash; the divergence our narrative traces between routes that recovered in passenger volume and routes that never came back.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2023", "month": "5", "day": "5" },
+      "text": {
+        "headline": "WHO Ends the Global Health Emergency",
+        "text": "<p>The WHO declares an end to COVID-19 as a global health emergency, more than three years after it began.</p>"
+      }
+    },
+    {
+      "start_date": { "year": "2024" },
+      "text": {
+        "headline": "National Passenger Volume Surpasses 2019",
+        "text": "<p>Across our ten metro areas, total annual passengers (437.9 million) finally exceed the 2019 baseline (424.7 million) &mdash; but as our recovery map shows, four of the ten metros individually had not.</p>"
+      }
+    }
+  ]
+}
