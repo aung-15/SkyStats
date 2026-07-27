@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Narrative — SkyStats</title>
-  <meta name="description" content="A 2,000+ word narrative, timeline, five data visualizations, and a map tracing how COVID-19 reshaped commercial air travel in the ten largest U.S. metro areas." />
+  <meta name="description" content="A 2,000+ word narrative, timeline, six data visualizations, and a map tracing how COVID-19 reshaped commercial air travel in the ten largest U.S. metro areas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -415,6 +415,76 @@
         that depended on it.
       </p>
 
+      <h2 id="happiness">A Global Postscript: Did Happier Countries Fly Less?</h2>
+      <p>
+        Our T-100 data ends at the U.S. border, so for one final question we
+        stepped outside it. If the pandemic's travel collapse was partly a
+        matter of individual choice &mdash; fear, caution, compliance &mdash;
+        might a country's collective mood have shaped how much its people
+        kept flying? To find out, we joined two additional datasets: each
+        country's 2020 life-evaluation score from the Gallup World Poll
+        (surveyed mid-pandemic, published in the World Happiness Report) and
+        the World Bank's count of air passengers carried, comparing 2019
+        against both 2020 (the collapse) and 2023 (the recovery).
+      </p>
+      <div class="chart-panel">
+        <h3>National Happiness vs. the Air Travel Collapse, 2019&ndash;2020</h3>
+        <div class="chart-wrap"><canvas id="chart-happiness-collapse"></canvas></div>
+        <p class="chart-caption">
+          Each dot is a country: its 2020 Gallup life-evaluation score
+          against the change in air passengers carried from 2019 to 2020,
+          colored by world region, with a linear trend line. Sources: World
+          Happiness Report 2021 panel; World Bank (IS.AIR.PSGR).
+        </p>
+      </div>
+      <p>
+        The relationship is weakly <em>negative</em> (r &asymp; &minus;0.18)
+        &mdash; and it runs opposite to the intuition that unhappy
+        populations grounded themselves. The world's happiest countries
+        during COVID, including Finland (7.9), Switzerland, and the
+        Netherlands, suffered among the deepest collapses, losing roughly
+        70&ndash;80% of their passengers, while several lower-scoring
+        countries such as China (&minus;37%) declined far less. One
+        plausible explanation is not happiness itself but what kind of
+        flying each country depends on: the happiest countries are wealthy
+        and internationally connected, and border-dependent international
+        travel collapsed hardest and recovered slowest, while large
+        domestic markets rebounded quickly &mdash; the same
+        domestic/international split our passengers-per-departure chart
+        shows inside the U.S. data.
+      </p>
+      <div class="chart-panel">
+        <h3>National Happiness vs. the Recovery, 2019&ndash;2023</h3>
+        <div class="chart-wrap"><canvas id="chart-happiness-recovery"></canvas></div>
+        <p class="chart-caption">
+          The same countries three years later: 2020 happiness against the
+          change in passengers carried from 2019 to 2023. The association
+          flattens further &mdash; recovery looks less like a function of
+          national mood than of market structure.
+        </p>
+      </div>
+      <p>
+        Because happiness and travel were measured in the same period
+        &mdash; both shaped by the pandemic itself &mdash; these charts can
+        establish association only, not causation. The r-value and scatter
+        imply correlation; the mechanism remains hypothetical without
+        further surveys or analysis.
+      </p>
+      <div class="callout">
+        <h4>A caveat in the data</h4>
+        <p>
+          The World Bank attributes passengers to the country where the
+          <em>airline</em> is registered, not where people actually fly
+          &mdash; which is why hub and flag-carrier countries can look
+          outsized, and why Denmark and Norway (served by the multinational
+          SAS) are absent. We also excluded Zambia and the Dominican
+          Republic from the recovery panel as artifacts of that method:
+          neither had registered carriers before COVID, so their post-2020
+          "growth" of several hundred percent reflects newly registered
+          airlines on near-zero 2019 baselines, not a real travel boom.
+        </p>
+      </div>
+
       <h2>Conclusion</h2>
       <p>
         Read together, our visualizations, timeline, and map tell a story
@@ -463,6 +533,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/charts.js"></script>
+  <script src="assets/js/happiness.js"></script>
   <script src="assets/js/map.js"></script>
 </body>
 </html>
