@@ -1,0 +1,593 @@
+{
+ "_source": "World Bank IS.AIR.PSGR (air passengers carried, by carrier registration country) x World Happiness Report 2021 panel (2020 Gallup World Poll Life Ladder). Zambia and Dominican Republic excluded from recovery: no registered carriers pre-COVID, so 2019 baselines near zero.",
+ "countries": [
+  {
+   "name": "Albania",
+   "region": "Europe & Central Asia",
+   "score": 5.365,
+   "collapse": -59.5,
+   "recovery": 21.8
+  },
+  {
+   "name": "Argentina",
+   "region": "Americas",
+   "score": 5.901,
+   "collapse": -81.1,
+   "recovery": 8.2
+  },
+  {
+   "name": "Australia",
+   "region": "East Asia & Pacific",
+   "score": 7.137,
+   "collapse": -69.6,
+   "recovery": -10.3
+  },
+  {
+   "name": "Austria",
+   "region": "Europe & Central Asia",
+   "score": 7.213,
+   "collapse": -71.4,
+   "recovery": -0.9
+  },
+  {
+   "name": "Bahrain",
+   "region": "Middle East & N. Africa",
+   "score": 6.173,
+   "collapse": -77.5,
+   "recovery": -11.0
+  },
+  {
+   "name": "Bangladesh",
+   "region": "South Asia",
+   "score": 5.28,
+   "collapse": -52.3,
+   "recovery": 5.9
+  },
+  {
+   "name": "Belgium",
+   "region": "Europe & Central Asia",
+   "score": 6.839,
+   "collapse": -75.3,
+   "recovery": -20.2
+  },
+  {
+   "name": "Bolivia",
+   "region": "Americas",
+   "score": 5.559,
+   "collapse": -35.4,
+   "recovery": 37.7
+  },
+  {
+   "name": "Bosnia and Herzegovina",
+   "region": "Europe & Central Asia",
+   "score": 5.516,
+   "collapse": -70.4,
+   "recovery": null
+  },
+  {
+   "name": "Brazil",
+   "region": "Americas",
+   "score": 6.11,
+   "collapse": -55.9,
+   "recovery": -7.3
+  },
+  {
+   "name": "Bulgaria",
+   "region": "Europe & Central Asia",
+   "score": 5.598,
+   "collapse": -46.8,
+   "recovery": -13.1
+  },
+  {
+   "name": "Cambodia",
+   "region": "East Asia & Pacific",
+   "score": 4.377,
+   "collapse": -57.4,
+   "recovery": -52.8
+  },
+  {
+   "name": "Cameroon",
+   "region": "Sub-Saharan Africa",
+   "score": 5.241,
+   "collapse": -51.3,
+   "recovery": 294.6
+  },
+  {
+   "name": "Canada",
+   "region": "Americas",
+   "score": 7.025,
+   "collapse": -70.4,
+   "recovery": -5.1
+  },
+  {
+   "name": "Chile",
+   "region": "Americas",
+   "score": 6.151,
+   "collapse": -62.2,
+   "recovery": 0.6
+  },
+  {
+   "name": "China",
+   "region": "East Asia & Pacific",
+   "score": 5.771,
+   "collapse": -36.7,
+   "recovery": -6.1
+  },
+  {
+   "name": "Colombia",
+   "region": "Americas",
+   "score": 5.709,
+   "collapse": -66.9,
+   "recovery": 14.5
+  },
+  {
+   "name": "Cote d'Ivoire",
+   "region": "Sub-Saharan Africa",
+   "score": 5.257,
+   "collapse": -56.9,
+   "recovery": -4.3
+  },
+  {
+   "name": "Croatia",
+   "region": "Europe & Central Asia",
+   "score": 6.508,
+   "collapse": -71.1,
+   "recovery": -20.8
+  },
+  {
+   "name": "Cyprus",
+   "region": "Europe & Central Asia",
+   "score": 6.26,
+   "collapse": -73.6,
+   "recovery": 83.1
+  },
+  {
+   "name": "Czech Republic",
+   "region": "Europe & Central Asia",
+   "score": 6.897,
+   "collapse": -82.9,
+   "recovery": -60.0
+  },
+  {
+   "name": "Dominican Republic",
+   "region": "Americas",
+   "score": 5.168,
+   "collapse": -72.4,
+   "recovery": null
+  },
+  {
+   "name": "Ecuador",
+   "region": "Americas",
+   "score": 5.354,
+   "collapse": -76.3,
+   "recovery": -5.4
+  },
+  {
+   "name": "Egypt",
+   "region": "Middle East & N. Africa",
+   "score": 4.472,
+   "collapse": -64.9,
+   "recovery": 26.2
+  },
+  {
+   "name": "El Salvador",
+   "region": "Americas",
+   "score": 5.462,
+   "collapse": -69.1,
+   "recovery": 25.1
+  },
+  {
+   "name": "Ethiopia",
+   "region": "Sub-Saharan Africa",
+   "score": 4.549,
+   "collapse": -60.9,
+   "recovery": 20.9
+  },
+  {
+   "name": "Finland",
+   "region": "Europe & Central Asia",
+   "score": 7.889,
+   "collapse": -76.0,
+   "recovery": -26.1
+  },
+  {
+   "name": "France",
+   "region": "Europe & Central Asia",
+   "score": 6.714,
+   "collapse": -65.0,
+   "recovery": -9.3
+  },
+  {
+   "name": "Georgia",
+   "region": "Europe & Central Asia",
+   "score": 5.123,
+   "collapse": -85.7,
+   "recovery": -37.1
+  },
+  {
+   "name": "Germany",
+   "region": "Europe & Central Asia",
+   "score": 7.312,
+   "collapse": -76.5,
+   "recovery": -26.8
+  },
+  {
+   "name": "Ghana",
+   "region": "Sub-Saharan Africa",
+   "score": 5.319,
+   "collapse": -46.2,
+   "recovery": -26.2
+  },
+  {
+   "name": "Greece",
+   "region": "Europe & Central Asia",
+   "score": 5.788,
+   "collapse": -65.0,
+   "recovery": 18.4
+  },
+  {
+   "name": "Hong Kong",
+   "region": "East Asia & Pacific",
+   "score": 5.295,
+   "collapse": -87.3,
+   "recovery": -44.7
+  },
+  {
+   "name": "Hungary",
+   "region": "Europe & Central Asia",
+   "score": 6.038,
+   "collapse": -63.3,
+   "recovery": 39.7
+  },
+  {
+   "name": "Iceland",
+   "region": "Europe & Central Asia",
+   "score": 7.575,
+   "collapse": -80.6,
+   "recovery": -6.7
+  },
+  {
+   "name": "India",
+   "region": "South Asia",
+   "score": 4.225,
+   "collapse": -58.8,
+   "recovery": 7.7
+  },
+  {
+   "name": "Iran",
+   "region": "Middle East & N. Africa",
+   "score": 4.865,
+   "collapse": -41.1,
+   "recovery": -16.5
+  },
+  {
+   "name": "Iraq",
+   "region": "Middle East & N. Africa",
+   "score": 4.785,
+   "collapse": -85.9,
+   "recovery": -30.9
+  },
+  {
+   "name": "Ireland",
+   "region": "Europe & Central Asia",
+   "score": 7.035,
+   "collapse": -67.9,
+   "recovery": 13.1
+  },
+  {
+   "name": "Israel",
+   "region": "Middle East & N. Africa",
+   "score": 7.195,
+   "collapse": -82.3,
+   "recovery": 4.4
+  },
+  {
+   "name": "Italy",
+   "region": "Europe & Central Asia",
+   "score": 6.488,
+   "collapse": -71.9,
+   "recovery": -27.0
+  },
+  {
+   "name": "Japan",
+   "region": "East Asia & Pacific",
+   "score": 6.118,
+   "collapse": -60.7,
+   "recovery": -7.6
+  },
+  {
+   "name": "Jordan",
+   "region": "Middle East & N. Africa",
+   "score": 4.094,
+   "collapse": -76.5,
+   "recovery": 7.3
+  },
+  {
+   "name": "Kazakhstan",
+   "region": "Europe & Central Asia",
+   "score": 6.168,
+   "collapse": -31.0,
+   "recovery": 55.2
+  },
+  {
+   "name": "Kenya",
+   "region": "Sub-Saharan Africa",
+   "score": 4.547,
+   "collapse": -70.9,
+   "recovery": -19.9
+  },
+  {
+   "name": "Kyrgyzstan",
+   "region": "Europe & Central Asia",
+   "score": 6.25,
+   "collapse": -77.9,
+   "recovery": -7.3
+  },
+  {
+   "name": "Laos",
+   "region": "East Asia & Pacific",
+   "score": 5.284,
+   "collapse": -60.5,
+   "recovery": -14.0
+  },
+  {
+   "name": "Latvia",
+   "region": "Europe & Central Asia",
+   "score": 6.229,
+   "collapse": -73.4,
+   "recovery": -10.1
+  },
+  {
+   "name": "Lithuania",
+   "region": "Europe & Central Asia",
+   "score": 6.391,
+   "collapse": -14.5,
+   "recovery": null
+  },
+  {
+   "name": "Malta",
+   "region": "Europe & Central Asia",
+   "score": 6.157,
+   "collapse": -76.9,
+   "recovery": 0.2
+  },
+  {
+   "name": "Mauritius",
+   "region": "Sub-Saharan Africa",
+   "score": 6.015,
+   "collapse": -76.4,
+   "recovery": -12.9
+  },
+  {
+   "name": "Mexico",
+   "region": "Americas",
+   "score": 5.964,
+   "collapse": -51.2,
+   "recovery": 12.6
+  },
+  {
+   "name": "Moldova",
+   "region": "Europe & Central Asia",
+   "score": 5.812,
+   "collapse": -78.2,
+   "recovery": -41.2
+  },
+  {
+   "name": "Mongolia",
+   "region": "East Asia & Pacific",
+   "score": 6.011,
+   "collapse": -80.7,
+   "recovery": 3.9
+  },
+  {
+   "name": "Morocco",
+   "region": "Middle East & N. Africa",
+   "score": 4.803,
+   "collapse": -67.9,
+   "recovery": -0.3
+  },
+  {
+   "name": "Myanmar",
+   "region": "East Asia & Pacific",
+   "score": 4.431,
+   "collapse": -59.3,
+   "recovery": -4.3
+  },
+  {
+   "name": "Namibia",
+   "region": "Sub-Saharan Africa",
+   "score": 4.451,
+   "collapse": -70.7,
+   "recovery": -71.6
+  },
+  {
+   "name": "Netherlands",
+   "region": "Europe & Central Asia",
+   "score": 7.504,
+   "collapse": -68.2,
+   "recovery": -10.6
+  },
+  {
+   "name": "New Zealand",
+   "region": "East Asia & Pacific",
+   "score": 7.257,
+   "collapse": -52.1,
+   "recovery": -15.4
+  },
+  {
+   "name": "Nigeria",
+   "region": "Sub-Saharan Africa",
+   "score": 5.503,
+   "collapse": -47.5,
+   "recovery": -19.4
+  },
+  {
+   "name": "Philippines",
+   "region": "East Asia & Pacific",
+   "score": 5.08,
+   "collapse": -77.8,
+   "recovery": -13.1
+  },
+  {
+   "name": "Poland",
+   "region": "Europe & Central Asia",
+   "score": 6.139,
+   "collapse": -73.7,
+   "recovery": -14.1
+  },
+  {
+   "name": "Portugal",
+   "region": "Europe & Central Asia",
+   "score": 5.768,
+   "collapse": -71.8,
+   "recovery": -17.0
+  },
+  {
+   "name": "Russia",
+   "region": "Europe & Central Asia",
+   "score": 5.495,
+   "collapse": -42.6,
+   "recovery": -9.2
+  },
+  {
+   "name": "Saudi Arabia",
+   "region": "Middle East & N. Africa",
+   "score": 6.56,
+   "collapse": -54.6,
+   "recovery": 3.9
+  },
+  {
+   "name": "Serbia",
+   "region": "Europe & Central Asia",
+   "score": 6.042,
+   "collapse": -67.8,
+   "recovery": 56.7
+  },
+  {
+   "name": "Slovenia",
+   "region": "Europe & Central Asia",
+   "score": 6.462,
+   "collapse": -91.0,
+   "recovery": null
+  },
+  {
+   "name": "South Africa",
+   "region": "Sub-Saharan Africa",
+   "score": 4.947,
+   "collapse": -68.3,
+   "recovery": -41.0
+  },
+  {
+   "name": "South Korea",
+   "region": "East Asia & Pacific",
+   "score": 5.793,
+   "collapse": -67.5,
+   "recovery": -17.5
+  },
+  {
+   "name": "Spain",
+   "region": "Europe & Central Asia",
+   "score": 6.502,
+   "collapse": -69.9,
+   "recovery": 6.6
+  },
+  {
+   "name": "Sweden",
+   "region": "Europe & Central Asia",
+   "score": 7.314,
+   "collapse": -72.3,
+   "recovery": -61.6
+  },
+  {
+   "name": "Switzerland",
+   "region": "Europe & Central Asia",
+   "score": 7.508,
+   "collapse": -70.3,
+   "recovery": -8.6
+  },
+  {
+   "name": "Tajikistan",
+   "region": "Europe & Central Asia",
+   "score": 5.373,
+   "collapse": -51.7,
+   "recovery": 28.1
+  },
+  {
+   "name": "Tanzania",
+   "region": "Sub-Saharan Africa",
+   "score": 3.786,
+   "collapse": -45.0,
+   "recovery": 27.6
+  },
+  {
+   "name": "Thailand",
+   "region": "East Asia & Pacific",
+   "score": 5.885,
+   "collapse": -63.1,
+   "recovery": -32.0
+  },
+  {
+   "name": "Tunisia",
+   "region": "Middle East & N. Africa",
+   "score": 4.731,
+   "collapse": -68.1,
+   "recovery": -5.2
+  },
+  {
+   "name": "Turkey",
+   "region": "Europe & Central Asia",
+   "score": 4.862,
+   "collapse": -59.8,
+   "recovery": 13.3
+  },
+  {
+   "name": "UAE",
+   "region": "Middle East & N. Africa",
+   "score": 6.458,
+   "collapse": -72.2,
+   "recovery": -3.1
+  },
+  {
+   "name": "Uganda",
+   "region": "Sub-Saharan Africa",
+   "score": 4.641,
+   "collapse": -75.0,
+   "recovery": 9.2
+  },
+  {
+   "name": "Ukraine",
+   "region": "Europe & Central Asia",
+   "score": 5.27,
+   "collapse": -76.3,
+   "recovery": null
+  },
+  {
+   "name": "United Kingdom",
+   "region": "Europe & Central Asia",
+   "score": 6.798,
+   "collapse": -78.8,
+   "recovery": -16.5
+  },
+  {
+   "name": "United States",
+   "region": "Americas",
+   "score": 7.028,
+   "collapse": -60.1,
+   "recovery": 1.6
+  },
+  {
+   "name": "Venezuela",
+   "region": "Americas",
+   "score": 4.574,
+   "collapse": -81.3,
+   "recovery": 17.6
+  },
+  {
+   "name": "Zambia",
+   "region": "Sub-Saharan Africa",
+   "score": 4.838,
+   "collapse": -50.2,
+   "recovery": null
+  }
+ ]
+}
