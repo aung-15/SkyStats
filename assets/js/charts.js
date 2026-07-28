@@ -1,13 +1,13 @@
 // SkyStats narrative charts — reads assets/data/skystats.json and renders with Chart.js
 (function () {
   var GOLD = "#c9a24b";
-  var GOLD_LIGHT = "rgba(201, 162, 75, 0.25)";
   var NAVY = "#12294a";
-  var NAVY_LIGHT = "rgba(18, 41, 74, 0.15)";
   var RED = "#a4432f";
   var GREEN = "#3f6b4a";
   var GRID = "#e4ddca";
   var TEXT = "#464b57";
+  var PALETTE = ["#12294a", "#c9a24b", "#a4432f", "#3f6b4a", "#6d8f78",
+    "#8a6fb0", "#c97a5f", "#2a4d80", "#7a7a4a", "#d9b869"];
 
   Chart.defaults.font.family = "'Source Sans 3', sans-serif";
   Chart.defaults.color = TEXT;
@@ -20,218 +20,11 @@
     });
 
   function renderAll(data) {
-    renderNationalYearly(data);
-    renderMonthly(data);
-    renderRecovery(data);
-    renderDistance(data);
     renderPaxPerDeparture(data);
     renderMsaMonthly(data);
-  }
-
-  function renderNationalYearly(data) {
-    var ctx = document.getElementById("chart-national");
-    if (!ctx) return;
-    var years = data.years.map(String);
-    var values = years.map(function (y) { return data.nationalYearly[y]; });
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: years,
-        datasets: [{
-          label: "Total Passengers",
-          data: values,
-          backgroundColor: years.map(function (y) {
-            return y === "2020" ? GOLD : NAVY_LIGHT;
-          }),
-          borderColor: years.map(function (y) {
-            return y === "2020" ? GOLD : NAVY;
-          }),
-          borderWidth: 1.5,
-          borderRadius: 4,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function (c) { return " " + c.parsed.y.toLocaleString() + " passengers"; }
-            }
-          }
-        },
-        scales: {
-          y: {
-            grid: { color: GRID },
-            ticks: {
-              callback: function (v) { return (v / 1e6) + "M"; }
-            }
-          },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  }
-
-  function renderMonthly(data) {
-    var ctx = document.getElementById("chart-monthly");
-    if (!ctx) return;
-    var labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "2019 (pre-pandemic)",
-            data: data.nationalMonthly2019,
-            borderColor: NAVY,
-            backgroundColor: NAVY,
-            tension: 0.3,
-            pointRadius: 3,
-          },
-          {
-            label: "2020 (pandemic onset)",
-            data: data.nationalMonthly2020,
-            borderColor: RED,
-            backgroundColor: RED,
-            tension: 0.3,
-            pointRadius: 3,
-          },
-          {
-            label: "2025 (five years later)",
-            data: data.nationalMonthly2025,
-            borderColor: GOLD,
-            backgroundColor: GOLD,
-            tension: 0.3,
-            pointRadius: 3,
-            borderDash: [5, 3],
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
-          tooltip: {
-            callbacks: {
-              label: function (c) { return " " + c.dataset.label + ": " + c.parsed.y.toLocaleString(); }
-            }
-          }
-        },
-        scales: {
-          y: {
-            grid: { color: GRID },
-            ticks: { callback: function (v) { return (v / 1e6) + "M"; } }
-          },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  }
-
-  function renderRecovery(data) {
-    var ctx = document.getElementById("chart-recovery");
-    if (!ctx) return;
-    var entries = Object.keys(data.recoveryPct2025vs2019).map(function (msa) {
-      return { msa: msa, pct: data.recoveryPct2025vs2019[msa] };
-    }).sort(function (a, b) { return b.pct - a.pct; });
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: entries.map(function (e) { return e.msa; }),
-        datasets: [{
-          label: "% change, 2025 vs. 2019",
-          data: entries.map(function (e) { return e.pct; }),
-          backgroundColor: entries.map(function (e) { return e.pct >= 0 ? "rgba(63,107,74,0.75)" : "rgba(164,67,47,0.75)"; }),
-          borderColor: entries.map(function (e) { return e.pct >= 0 ? GREEN : RED; }),
-          borderWidth: 1.5,
-          borderRadius: 4,
-        }]
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function (c) { return " " + (c.parsed.x > 0 ? "+" : "") + c.parsed.x + "% vs. 2019"; }
-            }
-          }
-        },
-        scales: {
-          x: {
-            grid: { color: GRID },
-            ticks: { callback: function (v) { return v + "%"; } }
-          },
-          y: { grid: { display: false } }
-        }
-      }
-    });
-  }
-
-  function renderDistance(data) {
-    var ctx = document.getElementById("chart-distance");
-    if (!ctx) return;
-    var years = data.distYears.map(String);
-
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: years,
-        datasets: [
-          {
-            label: "Avg. Nonstop Segment Distance (mi)",
-            data: years.map(function (y) { return data.nationalAvgDistance[y]; }),
-            borderColor: GOLD,
-            backgroundColor: GOLD,
-            yAxisID: "y",
-            tension: 0.3,
-            pointRadius: 4,
-          },
-          {
-            label: "Total Departures",
-            data: years.map(function (y) { return data.nationalDepartures[y]; }),
-            borderColor: NAVY,
-            backgroundColor: NAVY,
-            yAxisID: "y1",
-            tension: 0.3,
-            pointRadius: 4,
-            borderDash: [5, 3],
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
-        },
-        scales: {
-          y: {
-            type: "linear",
-            position: "left",
-            grid: { color: GRID },
-            title: { display: true, text: "Miles" },
-          },
-          y1: {
-            type: "linear",
-            position: "right",
-            grid: { display: false },
-            title: { display: true, text: "Departures" },
-            ticks: { callback: function (v) { return (v / 1e6).toFixed(1) + "M"; } }
-          },
-          x: { grid: { display: false } }
-        }
-      }
-    });
+    renderDistanceByMsa(data);
+    renderRouteRestoration(data);
+    renderLoadFactorGauge(data);
   }
 
   function renderPaxPerDeparture(data) {
@@ -291,15 +84,12 @@
     var ctx = document.getElementById("chart-msa-monthly");
     if (!ctx || !data.msaMonthlySeries) return;
 
-    var palette = ["#12294a", "#c9a24b", "#a4432f", "#3f6b4a", "#6d8f78",
-      "#8a6fb0", "#c97a5f", "#2a4d80", "#7a7a4a", "#d9b869"];
-
     var datasets = data.msas.map(function (msa, i) {
       return {
         label: msa,
         data: data.msaMonthlySeries[msa],
-        borderColor: palette[i % palette.length],
-        backgroundColor: palette[i % palette.length],
+        borderColor: PALETTE[i % PALETTE.length],
+        backgroundColor: PALETTE[i % PALETTE.length],
         borderWidth: msa === "New York" || msa === "Los Angeles" ? 2.5 : 1.25,
         pointRadius: 0,
         tension: 0.25,
@@ -362,6 +152,174 @@
               }
             }
           }
+        }
+      }
+    });
+  }
+
+  function renderDistanceByMsa(data) {
+    var ctx = document.getElementById("chart-distance-msa");
+    if (!ctx || !data.distanceByMsa) return;
+    var years = data.distYears.map(String);
+
+    var datasets = data.msas.map(function (msa, i) {
+      return {
+        label: msa,
+        data: years.map(function (y) { return data.distanceByMsa[msa][y]; }),
+        borderColor: PALETTE[i % PALETTE.length],
+        backgroundColor: PALETTE[i % PALETTE.length],
+        borderWidth: msa === "Los Angeles" || msa === "New York" ? 2.75 : 1.25,
+        pointRadius: 3,
+        tension: 0.2,
+      };
+    });
+
+    new Chart(ctx, {
+      type: "line",
+      data: { labels: years, datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 10, usePointStyle: true, font: { size: 10 } } },
+          tooltip: {
+            callbacks: {
+              label: function (c) { return " " + c.dataset.label + ": " + c.parsed.y + " mi"; }
+            }
+          },
+        },
+        scales: {
+          y: {
+            grid: { color: GRID },
+            title: { display: true, text: "Avg. nonstop segment distance (mi)" }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  function renderRouteRestoration(data) {
+    var ctx = document.getElementById("chart-route-restoration");
+    if (!ctx || !data.routeRestoration) return;
+    var d = data.routeRestoration;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: d.years.map(String),
+        datasets: [
+          {
+            label: "Traffic on Retained Routes (Domestic)",
+            data: d.domesticTraffic,
+            borderColor: NAVY,
+            backgroundColor: NAVY,
+            tension: 0.3,
+            pointRadius: 4,
+          },
+          {
+            label: "Traffic on Retained Routes (International)",
+            data: d.internationalTraffic,
+            borderColor: NAVY,
+            backgroundColor: NAVY,
+            borderDash: [5, 3],
+            tension: 0.3,
+            pointRadius: 4,
+          },
+          {
+            label: "Route Restoration (Domestic)",
+            data: d.domesticRouteRestoration,
+            borderColor: GOLD,
+            backgroundColor: GOLD,
+            tension: 0.3,
+            pointRadius: 4,
+          },
+          {
+            label: "Route Restoration (International)",
+            data: d.internationalRouteRestoration,
+            borderColor: GOLD,
+            backgroundColor: GOLD,
+            borderDash: [5, 3],
+            tension: 0.3,
+            pointRadius: 4,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 12, usePointStyle: true, font: { size: 10.5 } } },
+          tooltip: {
+            callbacks: {
+              label: function (c) { return " " + c.dataset.label + ": " + c.parsed.y + "% of 2019"; }
+            }
+          }
+        },
+        scales: {
+          y: {
+            grid: { color: GRID },
+            title: { display: true, text: "% of 2019 (=100)" }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  function renderLoadFactorGauge(data) {
+    var ctx = document.getElementById("chart-load-factor");
+    if (!ctx || !data.loadFactorGauge) return;
+    var d = data.loadFactorGauge;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: d.years.map(String),
+        datasets: [
+          {
+            label: "Avg. Seats per Departure",
+            data: d.nationalSeatsPerDeparture,
+            backgroundColor: "rgba(18,41,74,0.75)",
+            borderColor: NAVY,
+            borderWidth: 1.5,
+            borderRadius: 4,
+            yAxisID: "y",
+          },
+          {
+            label: "Load Factor (%)",
+            data: d.nationalLoadFactorPct,
+            type: "line",
+            borderColor: RED,
+            backgroundColor: RED,
+            borderWidth: 2.5,
+            pointRadius: 5,
+            yAxisID: "y1",
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
+        },
+        scales: {
+          y: {
+            type: "linear",
+            position: "left",
+            grid: { color: GRID },
+            title: { display: true, text: "Seats per departure" },
+          },
+          y1: {
+            type: "linear",
+            position: "right",
+            grid: { display: false },
+            title: { display: true, text: "Load factor (%)" },
+            min: 70,
+            max: 90,
+          },
+          x: { grid: { display: false } }
         }
       }
     });

@@ -1251,5 +1251,53 @@
       2918117,
       3218204
     ]
+  },
+  "routeRestoration": {
+    "years": [
+      2019,
+      2020,
+      2025
+    ],
+    "domesticTraffic": [
+      100,
+      42,
+      102.3
+    ],
+    "internationalTraffic": [
+      100,
+      27,
+      106.9
+    ],
+    "domesticRouteRestoration": [
+      100,
+      60,
+      68.1
+    ],
+    "internationalRouteRestoration": [
+      100,
+      60,
+      65.5
+    ]
+  },
+  "loadFactorGauge": {
+    "years": [
+      2019,
+      2025
+    ],
+    "nationalSeatsPerDeparture": [
+      126,
+      139
+    ],
+    "nationalLoadFactorPct": [
+      82.4,
+      79.7
+    ],
+    "gaugeByMsa2019to2025": {
+      "Philadelphia": 18.5,
+      "Atlanta": 16.1
+    },
+    "loadFactorDeclineByMsa": {
+      "Phoenix": -5.6
+    }
   }
 }
