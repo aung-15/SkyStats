@@ -25,6 +25,7 @@
     renderDistanceByMsa(data);
     renderRouteRestoration(data);
     renderLoadFactorGauge(data);
+    renderDayOfWeek(data);
   }
 
   function renderPaxPerDeparture(data) {
@@ -324,4 +325,67 @@
       }
     });
   }
+
+  function renderDayOfWeek(data) {
+    var ctx = document.getElementById("chart-day-of-week");
+    if (!ctx || !data.dayOfWeek) return;
+    var d = data.dayOfWeek;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: d.labels,
+        datasets: [
+          {
+            label: "May 2019",
+            data: d.y2019,
+            backgroundColor: "rgba(18,41,74,0.75)",
+            borderColor: NAVY,
+            borderWidth: 1.5,
+            borderRadius: 4,
+          },
+          {
+            label: "May 2026",
+            data: d.y2026,
+            backgroundColor: "rgba(201,162,75,0.75)",
+            borderColor: GOLD,
+            borderWidth: 1.5,
+            borderRadius: 4,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
+          tooltip: {
+            callbacks: {
+              label: function (c) {
+                var i = c.dataIndex, a = d.y2019[i], b = d.y2026[i];
+                var pct = (b - a) / a * 100;
+                var sign = pct >= 0 ? "+" : "";
+                if (c.datasetIndex === 1) {
+                  return " May 2026: " + b.toLocaleString() + " flights/day (" +
+                    sign + pct.toFixed(1) + "% vs. 2019)";
+                }
+                return " May 2019: " + a.toLocaleString() + " flights/day";
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            suggestedMin: 15000,
+            grid: { color: GRID },
+            title: { display: true, text: "Avg. departures per day" },
+            ticks: { callback: function (v) { return v.toLocaleString(); } }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
 })();
